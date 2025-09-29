@@ -1,0 +1,500 @@
+-- SQL Server Instance:  smg-sql01
+USE [Utilities];
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('nrc.qy_GetOutputFileLines'))
+   DROP PROC [nrc].[qy_GetOutputFileLines]
+GO
+CREATE PROCEDURE [nrc].[qy_GetOutputFileLines]
+
+/* -----------------------------------------------------------------------------------------------------------
+   Procedure Name  :  nrc.qy_GetOutputFileLines
+   Business Analyis:
+   Project/Process :   
+   Description     :  Get Output Lines from the AthenaInputFileForThisNrcRun table.
+	  
+   Author          :  Philip Morrison 
+   Create Date     :  6/13/2025
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/13/2025  1.01.001   Philip Morrison    Created
+
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+AS
+BEGIN
+
+-- Instance Declarations.
+DECLARE @TopRecordOutputFullFileName [nvarchar] (300) = '';
+DECLARE @FileType [nvarchar] (50) = '';
+DECLARE @HeaderLine [nvarchar] (MAX) = '';
+
+DECLARE @OutputLineTable TABLE
+(
+  [OutputLineTableID] [int] IDENTITY ( 1, 1 ) NOT NULL
+  ,[OutputLine] [nvarchar] (MAX)
+);
+
+-- Template Declarations
+DECLARE @Application            varchar(128) = 'Nrc' 
+DECLARE @Version                varchar(25)  = '1.00.001'
+
+DECLARE @ProcessID              int          = 0
+DECLARE @Process                varchar(128) = 'ImportAndConvert'
+
+DECLARE @BatchOutID             int
+DECLARE @BatchDescription       varchar(1000) = @@ServerName + '  - ' + @Version
+DECLARE @BatchDetailDescription varchar(1000)
+DECLARE @BatchMessage           varchar(MAX)
+DECLARE @User                   varchar(128) = SUSER_NAME()
+
+DECLARE @AnticipatedRecordCount int 
+DECLARE @ActualRecordCount      int
+
+SET NOCOUNT ON
+
+BEGIN TRY
+
+--  Initialize Batch
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  NULL, 'BatchStart', @BatchDescription, @ProcessID, @Process
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SET @BatchDetailDescription = '010/060:  Get Top Line Output Filename'
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailStart', @BatchDetailDescription
+	  
+	  SELECT @AnticipatedRecordCount = 1;
+	  
+      -- Get Top Line's Output Filename
+    
+    SELECT TOP 1 @TopRecordOutputFullFileName = [OutputFullFileName]
+    FROM [Nrc].[nrc].[OutputFileDataForThisNcrRun];
+	
+    SET @ActualRecordCount = @@ROWCOUNT
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailEnd', NULL, NULL, NULL, @AnticipatedRecordCount, @ActualRecordCount
+    
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SET @BatchDetailDescription = '020/060:  Determine FileType from Output Filename'
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailStart', @BatchDetailDescription
+	  
+	  SELECT @AnticipatedRecordCount = 1;
+      
+      -- Determine FileType from Output Filename
+      SET @FileType = CASE WHEN CHARINDEX('SLEEP', UPPER(@TopRecordOutputFullFileName)) > 0 THEN 'Sleep'
+	                       WHEN CHARINDEX('SEC', UPPER(@TopRecordOutputFullFileName)) > 0 THEN 'Express Clinic' 
+                           ELSE 'Clinic' 
+                      END
+	
+    SET @ActualRecordCount = @@ROWCOUNT
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailEnd', NULL, NULL, NULL, @AnticipatedRecordCount, @ActualRecordCount
+    
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SET @BatchDetailDescription = '030/060: IF FileType is Clinic Include the CGCAHPS column.'
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailStart', @BatchDetailDescription
+    
+      IF @FileType = 'Clinic' BEGIN   	  
+	     SELECT @AnticipatedRecordCount = COUNT(*) + 1
+                                          FROM [Nrc].[nrc].[OutputFileDataForThisNcrRun];  
+      
+         SET @HeaderLine =
+               'PatientNameGiven' + 
+               ',PatientNameFamily' +
+	           ',AddressStreet1' +
+	           ',AddressCity' +
+	           ',AddressState' +
+	           ',AddressPostalCode' +
+	           ',PhoneAreaCityCode' +
+	           ',PhoneLocalNumber' +
+	           ',MRN' +
+	           ',DateOfBirth' +
+	           ',AdministrativeSex' +
+	           ',PrimaryLanguage' +
+	           ',Race' +
+	           ',EthnicGroup' +
+	           ',MaritalStatus' +
+	           ',Email' +
+	           ',PatientClass' +
+	           ',FacilityName' +
+	           ',FacilityNumber' +
+	           ',VisitNumber' +
+	           ',AdmitDateTime' +
+	           ',DischargeDateTime' +
+	           ',AdmitSource' +
+	           ',DischargeStatus' +
+	           ',LocationCriteria' +
+	           ',Location' +
+	           ',MSDRG' +
+	           ',DiagnosisPrimaryICD10' +
+	           ',Diagnosis2ICD10' +
+	           ',Diagnosis3ICD10' +
+	           ',IsDeceased' +
+	           ',ICU' +
+	           ',EDAdmit' +
+	           ',PrimaryPayerID' +
+	           ',PrimaryPayerName' +
+	           ',AttendingDoctorNameGiven' +
+	           ',AttendingDoctorNameSecondGiven' +
+	           ',AttendingDoctorNameFamily' +
+	           ',AttendingDoctorNameSuffix' +
+	           ',AttendingDoctorDegree' +
+	           ',AttendingDoctorNPI' +
+	           ',AttendingDoctorSpecialty' +
+	           ',ProcedurePrimaryCPT' +
+	           ',Procedure2CPT' +
+	           ',Procedure3CPT' +
+	           ',HNumIPDisch' +
+	           ',PreferredOutreachMode' + 
+	           ',CGCAHPS';
+               
+        -- Add Header Line               
+        INSERT INTO @OutputLineTable
+        VALUES (@HeaderLine);        
+         
+        -- Add Detail Lines                        
+        INSERT INTO @OutputLineTable
+        SELECT 
+           [PatientNameGiven] + ',' +
+           [PatientNameFamily] + ',' +
+	       [AddressStreet1] + ',' +
+	       [AddressCity] + ',' +
+	       [AddressState] + ',' +
+	       [AddressPostalCode] + ',' +
+	       [PhoneAreaCityCode] + ',' +
+	       [PhoneLocalNumber] + ',' +
+	       [MRN] + ',' +
+	       [DateOfBirth]  + ',' +
+	       [AdministrativeSex]  + ',' +
+	       [PrimaryLanguage]  + ',' +
+	       [Race] + ',' +
+	       [EthnicGroup] + ',' +
+	       [MaritalStatus] + ',' +
+	       [Email] + ',' +
+	       [PatientClass] + ',' +
+	       [FacilityName] + ',' +
+	       [FacilityNumber] + ',' +
+	       [VisitNumber] + ',' +
+           CONVERT([nvarchar] (10) , CONVERT ([date], [AdmitDateTime]), 101) + ',' +
+	       CONVERT([nvarchar] (10) , CONVERT ([date], [DischargeDateTime]), 101) + ',' +	       
+		   [AdmitSource] + ',' +
+	       [DischargeStatus] + ',' +
+	       [LocationCriteria] + ',' +
+	       [Location] + ',' +
+	       [MSDRG] + ',' +
+	       [DiagnosisPrimaryICD10] + ',' +
+	       [Diagnosis2ICD10] + ',' +
+	       [Diagnosis3ICD10] + ',' +
+	       [IsDeceased] + ',' +
+	       [ICU] + ',' +
+	       [EDAdmit] + ',' +
+	       [PrimaryPayerID] + ',' +
+	       [PrimaryPayerName] + ',' +
+	       [AttendingDoctorNameGiven] + ',' +
+	       [AttendingDoctorNameSecondGiven] + ',' +
+	       [AttendingDoctorNameFamily]  + ',' +
+	       [AttendingDoctorNameSuffix] + ',' +
+	       [AttendingDoctorDegree] + ',' +
+	       [AttendingDoctorNPI] + ',' +
+	       [AttendingDoctorSpecialty] + ',' +
+	       [ProcedurePrimaryCPT] + ',' +
+	       [Procedure2CPT] + ',' +
+	       [Procedure3CPT] + ',' +
+	       [HNumIPDisch] + ',' +
+	       [PreferredOutreachMode] + ',' +
+	       [CGCAHPS] AS [OutputLine]
+         FROM [Nrc].[nrc].[OutputFileDataForThisNcrRun];  
+      END
+	
+    SET @ActualRecordCount = @@ROWCOUNT
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailEnd', NULL, NULL, NULL, @AnticipatedRecordCount, @ActualRecordCount
+    
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SET @BatchDetailDescription = '040/060:  If File Type is Express Clinics Omit the CGCAHPS column.'
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailStart', @BatchDetailDescription
+	  
+      IF @FileType = 'Express Clinic' BEGIN   	  
+         SELECT @AnticipatedRecordCount = COUNT(*) + 1
+                                          FROM [Nrc].[nrc].[OutputFileDataForThisNcrRun];  
+      
+         SET @HeaderLine =
+               'PatientNameGiven' + 
+               ',PatientNameFamily' +
+	           ',AddressStreet1' +
+	           ',AddressCity' +
+	           ',AddressState' +
+	           ',AddressPostalCode' +
+	           ',PhoneAreaCityCode' +
+	           ',PhoneLocalNumber' +
+	           ',MRN' +
+	           ',DateOfBirth' +
+	           ',AdministrativeSex' +
+	           ',PrimaryLanguage' +
+	           ',Race' +
+	           ',EthnicGroup' +
+	           ',MaritalStatus' +
+	           ',Email' +
+	           ',PatientClass' +
+	           ',FacilityName' +
+	           ',FacilityNumber' +
+	           ',VisitNumber' +
+	           ',AdmitDateTime' +
+	           ',DischargeDateTime' +
+	           ',AdmitSource' +
+	           ',DischargeStatus' +
+	           ',LocationCriteria' +
+	           ',Location' +
+	           ',MSDRG' +
+	           ',DiagnosisPrimaryICD10' +
+	           ',Diagnosis2ICD10' +
+	           ',Diagnosis3ICD10' +
+	           ',IsDeceased' +
+	           ',ICU' +
+	           ',EDAdmit' +
+	           ',PrimaryPayerID' +
+	           ',PrimaryPayerName' +
+	           ',AttendingDoctorNameGiven' +
+	           ',AttendingDoctorNameSecondGiven' +
+	           ',AttendingDoctorNameFamily' +
+	           ',AttendingDoctorNameSuffix' +
+	           ',AttendingDoctorDegree' +
+	           ',AttendingDoctorNPI' +
+	           ',AttendingDoctorSpecialty' +
+	           ',ProcedurePrimaryCPT' +
+	           ',Procedure2CPT' +
+	           ',Procedure3CPT' +
+	           ',HNumIPDisch' +
+	           ',PreferredOutreachMode';
+               
+        -- Add Header Line               
+        INSERT INTO @OutputLineTable
+        VALUES (@HeaderLine);        
+         
+        -- Add Detail Lines                        
+        INSERT INTO @OutputLineTable
+        SELECT 
+           [PatientNameGiven] + ',' +
+           [PatientNameFamily] + ',' +
+	       [AddressStreet1] + ',' +
+	       [AddressCity] + ',' +
+	       [AddressState] + ',' +
+	       [AddressPostalCode] + ',' +
+	       [PhoneAreaCityCode] + ',' +
+	       [PhoneLocalNumber] + ',' +
+	       [MRN] + ',' +
+	       [DateOfBirth]  + ',' +
+	       [AdministrativeSex]  + ',' +
+	       [PrimaryLanguage]  + ',' +
+	       [Race] + ',' +
+	       [EthnicGroup] + ',' +
+	       [MaritalStatus] + ',' +
+	       [Email] + ',' +
+	       [PatientClass] + ',' +
+	       [FacilityName] + ',' +
+	       [FacilityNumber] + ',' +
+	       [VisitNumber] + ',' +
+           CONVERT([nvarchar] (10) , CONVERT ([date], [AdmitDateTime]), 101) + ',' +
+	       CONVERT([nvarchar] (10) , CONVERT ([date], [DischargeDateTime]), 101) + ',' +	       
+	       [AdmitSource] + ',' +
+	       [DischargeStatus] + ',' +
+	       [LocationCriteria] + ',' +
+	       [Location] + ',' +
+	       [MSDRG] + ',' +
+	       [DiagnosisPrimaryICD10] + ',' +
+	       [Diagnosis2ICD10] + ',' +
+	       [Diagnosis3ICD10] + ',' +
+	       [IsDeceased] + ',' +
+	       [ICU] + ',' +
+	       [EDAdmit] + ',' +
+	       [PrimaryPayerID] + ',' +
+	       [PrimaryPayerName] + ',' +
+	       [AttendingDoctorNameGiven] + ',' +
+	       [AttendingDoctorNameSecondGiven] + ',' +
+	       [AttendingDoctorNameFamily]  + ',' +
+	       [AttendingDoctorNameSuffix] + ',' +
+	       [AttendingDoctorDegree] + ',' +
+	       [AttendingDoctorNPI] + ',' +
+	       [AttendingDoctorSpecialty] + ',' +
+	       [ProcedurePrimaryCPT] + ',' +
+	       [Procedure2CPT] + ',' +
+	       [Procedure3CPT] + ',' +
+	       [HNumIPDisch] + ',' +
+	       [PreferredOutreachMode] AS [OutputLine]
+         FROM [Nrc].[nrc].[OutputFileDataForThisNcrRun];       
+         
+      END
+	
+    SET @ActualRecordCount = @@ROWCOUNT
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailEnd', NULL, NULL, NULL, @AnticipatedRecordCount, @ActualRecordCount
+    
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SET @BatchDetailDescription = '050/060:  If File Type is Sleep Omit the CGCAHPS column.'
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailStart', @BatchDetailDescription
+	  
+      IF @FileType = 'Sleep' BEGIN   	  
+          SELECT @AnticipatedRecordCount = COUNT(*) + 1
+                                          FROM [Nrc].[nrc].[OutputFileDataForThisNcrRun];  
+      
+         SET @HeaderLine =
+               'PatientNameGiven' + 
+               ',PatientNameFamily' +
+	           ',AddressStreet1' +
+	           ',AddressCity' +
+	           ',AddressState' +
+	           ',AddressPostalCode' +
+	           ',PhoneAreaCityCode' +
+	           ',PhoneLocalNumber' +
+	           ',MRN' +
+	           ',DateOfBirth' +
+	           ',AdministrativeSex' +
+	           ',PrimaryLanguage' +
+	           ',Race' +
+	           ',EthnicGroup' +
+	           ',MaritalStatus' +
+	           ',Email' +
+	           ',PatientClass' +
+	           ',FacilityName' +
+	           ',FacilityNumber' +
+	           ',VisitNumber' +
+	           ',AdmitDateTime' +
+	           ',DischargeDateTime' +
+	           ',AdmitSource' +
+	           ',DischargeStatus' +
+	           ',LocationCriteria' +
+	           ',Location' +
+	           ',MSDRG' +
+	           ',DiagnosisPrimaryICD10' +
+	           ',Diagnosis2ICD10' +
+	           ',Diagnosis3ICD10' +
+	           ',IsDeceased' +
+	           ',ICU' +
+	           ',EDAdmit' +
+	           ',PrimaryPayerID' +
+	           ',PrimaryPayerName' +
+	           ',AttendingDoctorNameGiven' +
+	           ',AttendingDoctorNameSecondGiven' +
+	           ',AttendingDoctorNameFamily' +
+	           ',AttendingDoctorNameSuffix' +
+	           ',AttendingDoctorDegree' +
+	           ',AttendingDoctorNPI' +
+	           ',AttendingDoctorSpecialty' +
+	           ',ProcedurePrimaryCPT' +
+	           ',Procedure2CPT' +
+	           ',Procedure3CPT' +
+	           ',HNumIPDisch' +
+	           ',PreferredOutreachMode';
+               
+        -- Add Header Line               
+        INSERT INTO @OutputLineTable
+        VALUES (@HeaderLine);        
+         
+        -- Add Detail Lines                        
+        INSERT INTO @OutputLineTable
+        SELECT 
+           [PatientNameGiven] + ',' +
+           [PatientNameFamily] + ',' +
+	       [AddressStreet1] + ',' +
+	       [AddressCity] + ',' +
+	       [AddressState] + ',' +
+	       [AddressPostalCode] + ',' +
+	       [PhoneAreaCityCode] + ',' +
+	       [PhoneLocalNumber] + ',' +
+	       [MRN] + ',' +
+	       [DateOfBirth]  + ',' +
+	       [AdministrativeSex]  + ',' +
+	       [PrimaryLanguage]  + ',' +
+	       [Race] + ',' +
+	       [EthnicGroup] + ',' +
+	       [MaritalStatus] + ',' +
+	       [Email] + ',' +
+	       [PatientClass] + ',' +
+	       [FacilityName] + ',' +
+	       [FacilityNumber] + ',' +
+	       [VisitNumber] + ',' +
+           CONVERT([nvarchar] (10) , CONVERT ([date], [AdmitDateTime]), 101) + ',' +
+	       CONVERT([nvarchar] (10) , CONVERT ([date], [DischargeDateTime]), 101) + ',' +	       
+	       [AdmitSource] + ',' +
+	       [DischargeStatus] + ',' +
+	       [LocationCriteria] + ',' +
+	       [Location] + ',' +
+	       [MSDRG] + ',' +
+	       [DiagnosisPrimaryICD10] + ',' +
+	       [Diagnosis2ICD10] + ',' +
+	       [Diagnosis3ICD10] + ',' +
+	       [IsDeceased] + ',' +
+	       [ICU] + ',' +
+	       [EDAdmit] + ',' +
+	       [PrimaryPayerID] + ',' +
+	       [PrimaryPayerName] + ',' +
+	       [AttendingDoctorNameGiven] + ',' +
+	       [AttendingDoctorNameSecondGiven] + ',' +
+	       [AttendingDoctorNameFamily]  + ',' +
+	       [AttendingDoctorNameSuffix] + ',' +
+	       [AttendingDoctorDegree] + ',' +
+	       [AttendingDoctorNPI] + ',' +
+	       [AttendingDoctorSpecialty] + ',' +
+	       [ProcedurePrimaryCPT] + ',' +
+	       [Procedure2CPT] + ',' +
+	       [Procedure3CPT] + ',' +
+	       [HNumIPDisch] + ',' +
+	       [PreferredOutreachMode] AS [OutputLine]
+         FROM [Nrc].[nrc].[OutputFileDataForThisNcrRun];       
+      END
+      
+    SET @ActualRecordCount = @@ROWCOUNT
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailEnd', NULL, NULL, NULL, @AnticipatedRecordCount, @ActualRecordCount
+    
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    SET @BatchDetailDescription = '060/060:  SELECT Outputlines.'
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailStart', @BatchDetailDescription
+
+       -- SELECT Outputlines
+       SELECT [OutputLine]
+       FROM @OutputLineTable;
+	  
+	
+    SET @ActualRecordCount = @@ROWCOUNT
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT,  @BatchOutID, 'DetailEnd', NULL, NULL, NULL, @AnticipatedRecordCount, @ActualRecordCount
+    
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+--  Close Batch
+    EXEC Admin.Utilities.logs.di_Batch @BatchOutID OUTPUT, @BatchOutID, 'BatchEnd'
+
+END TRY
+
+
+BEGIN CATCH
+DECLARE @Err              int
+     ,  @ErrorMessage     varchar(Max)
+     ,  @ErrorLine        varchar(128)
+     ,  @Workstation      varchar(128) = @Application
+     ,  @Procedure        VARCHAR(500)
+
+    IF ERROR_NUMBER() IS NULL 
+      SET @Err =0;
+    ELSE
+      SET @Err = ERROR_NUMBER();
+
+    SET @ErrorMessage = ERROR_MESSAGE()
+    SET @ErrorLine    = 'SP Line Number: ' + CAST(ERROR_LINE() as varchar(10)) 
+    
+	SET @Workstation  = HOST_NAME()
+	
+    SET @Procedure    = @@SERVERNAME + '.' + DB_NAME() + '.' + OBJECT_SCHEMA_NAME(@@ProcID) + '.' + OBJECT_NAME(@@ProcID) + ' - ' + @ErrorLine + ' - ' + LEFT(@BatchDetailDescription, 7)
+    EXEC Admin.Utilities.administration.di_ErrorLog  @Application ,@Process, @Version ,0, @ErrorMessage, @Procedure,  @User , @Workstation
+
+    SET @BatchMessage = 'Process Failed:  ' +  @ErrorMessage
+    EXEC Admin.Utilities.logs.di_batch @BatchOutID OUTPUT, @BatchOutID, 'BatchEnd', @BatchMessage
+	
+    RAISERROR(@ErrorMessage, 16,1)
+
+END CATCH
+
+
+END

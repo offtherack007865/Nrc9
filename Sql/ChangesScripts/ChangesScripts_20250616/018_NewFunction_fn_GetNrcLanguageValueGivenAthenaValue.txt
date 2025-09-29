@@ -1,0 +1,73 @@
+-- SQL Server Instance:  smg-sql01
+USE [Support]
+IF EXISTS (
+    SELECT * FROM sysobjects WHERE id = object_id(N'nrc.fn_GetNrcLanguageValueGivenAthenaValue') 
+    AND xtype IN (N'FN', N'IF', N'TF')
+)
+    DROP FUNCTION [nrc].[fn_GetNrcLanguageValueGivenAthenaValue]
+GO
+
+/* -----------------------------------------------------------------------------------------------------------
+   Function Name  :  nrc.fn_GetNrcLanguageValueGivenAthenaValue
+   Business Analyis:
+   Project/Process :   
+   Description     :  If the inputted Athena Language Value is either blank or does not exist in the LanguageCrossWalk table,
+                      output Error Message along with the default NRC Value.  The calling procedure will parse the default value
+					  from this message.  If the inputted Athena Language does exist in that table, output the corresponding 
+					  NrcValue.
+                        
+   Author          :   Philip Morrison
+   Create Date     :   6/13/2025  
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/13/2025  1.01.001   Philip Morrison    Created
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+
+-- create function scalar-valued udf
+CREATE FUNCTION [nrc].[fn_GetNrcLanguageValueGivenAthenaValue]
+(
+  @inputAthenaLanguageValue [varchar] (100)
+) 
+RETURNS [nvarchar] (100)
+AS
+BEGIN
+   
+DECLARE @returnString [nvarchar](100) = '';
+
+-- If the inputted Language value is blanks, merely put out the default value.
+
+if (LEN(ltrim(rtrim(@inputAthenaLanguageValue))) = 0) BEGIN
+   SET @returnString = 'eng';
+   RETURN @returnString;
+END
+
+DECLARE @existsAthenaValue [varchar] (100) = null;
+DECLARE @existsNrcValue [varchar] (100) = null;
+
+-- Look up the inputted Athena value in the LanguageCrossWalk table.
+
+SELECT @existsAthenaValue = [AthenaValue]
+       ,@existsNrcValue = [NrcValue]
+FROM [Nrc].[nrc].[LanguageCrossWalk]
+WHERE [AthenaValue] = @inputAthenaLanguageValue;
+
+-- If the inputted Athena value does not exist, put out the error message with the default value.
+
+IF (@existsAthenaValue IS NULL) BEGIN
+   SET @returnString = 'eng';
+   RETURN @returnString;
+END
+
+-- If the inputted Athena value does exist in the table, put out the error message with the default value.
+
+SET @returnString = @existsNrcValue;
+
+RETURN @returnString;
+
+END

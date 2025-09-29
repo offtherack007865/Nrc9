@@ -1,0 +1,181 @@
+[
+  {
+    "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
+    "Method": "dd_ExtraSurveyQuestionWorkDays",
+    "RelativePath": "api/Ops/dd_ExtraSurveyQuestionWorkDays",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Nrc9.Data.Models.dd_ExtraSurveyQuestionWorkDaysOutput",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
+    "Method": "dd_InputFile",
+    "RelativePath": "api/Ops/dd_InputFile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Nrc9.Data.Models.dd_InputFileOutput",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
+    "Method": "di_ExtraSurveyQuestionWorkDays",
+    "RelativePath": "api/Ops/di_ExtraSurveyQuestionWorkDays",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inputWorkDay",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Nrc9.Data.Models.di_ExtraSurveyQuestionWorkDaysOutput",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
+    "Method": "di_FinalizeInputFile",
+    "RelativePath": "api/Ops/di_FinalizeInputFile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inputOutputFullFilename",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Nrc9.Data.Models.di_FinalizeInputFileOutput",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
+    "Method": "qy_GetNrcConfig",
+    "RelativePath": "api/Ops/qy_GetNrcConfig",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inputApplicationName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "inputType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "inputProcessName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "inputNameFilter",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "inputUser",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Nrc9.Data.Models.qy_GetNrcConfigOutput",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
+    "Method": "qy_GetOutputFileLines",
+    "RelativePath": "api/Ops/qy_GetOutputFileLines",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Nrc9.Data.Models.qy_GetOutputFileLinesOutput",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Nrc9.WebApiLand.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Nrc9.WebApiLand.WeatherForecast, Nrc9.WebApiLand, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]

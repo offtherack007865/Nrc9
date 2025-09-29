@@ -1,0 +1,68 @@
+-- SQL Instance Name:  smg-sql01
+USE [Staging];
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'InputFile' AND TABLE_SCHEMA = 'nrc')
+   DROP TABLE [nrc].[InputFile];
+GO
+/* -----------------------------------------------------------------------------------------------------------
+   Table Name  :  nrc.InputFile
+   Business Analyis:
+   Project/Process :   
+   Description     :  The Staging table for the  Athena Input file for this NRC Run
+                        
+   Author          :   Philip Morrison
+   Create Date     :   6/23/2025 
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/23/2025 1.01.001   Philip Morrison    Created
+   6/26/2025  1.01.002   Philip Morrison    Changed Database name and Table Name to meet DBA standards.   
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+
+CREATE TABLE [nrc].[InputFile](
+    [InputFileID] [int] IDENTITY ( 1, 1 ) NOT NULL
+	,[PatientFirstName] [nvarchar] (MAX) NOT NULL
+	,[PatientLastName] [nvarchar] (MAX) NOT NULL
+	,[PatientEmail] [nvarchar] (MAX) NULL
+	,[PatientHomePhone] [nvarchar] (MAX) NOT NULL
+	,[PatientMobileNo] [nvarchar] (MAX) NOT NULL
+	,[ApptDate] [nvarchar] (MAX) NOT NULL
+	,[PatientDob] [nvarchar] (MAX) NOT NULL
+    ,[patientZip] [nvarchar] (MAX) NOT NULL
+	,[RndrngPrvdrFrstNme] [nvarchar] (MAX) NULL
+	,[RndrngPrvdrLstNme] [nvarchar] (MAX) NULL
+	,[RndrngPrvdrType] [nvarchar] (MAX) NULL	
+	,[RndrngPrvdrNpiNo] [nvarchar] (MAX) NOT NULL	
+	,[PatientPrimaryInsHldrFi] [nvarchar] (MAX) NULL	
+	,[PatientPrimaryInsHldrLa] [nvarchar] (MAX) NULL		
+	,[GuarantorPhone] [nvarchar] (MAX) NOT NULL		
+	,[GuarantorEmail] [nvarchar] (MAX) NOT NULL	
+	,[SvcDeptId] [nvarchar] (MAX) NOT NULL		
+	,[SvcDprtmnt] [nvarchar] (MAX) NOT NULL		
+	,[PatientId] [nvarchar] (MAX) NOT NULL		
+	,[PatientPrimaryInsPkgType] [nvarchar] (MAX) NOT NULL
+	,[PatientPrimaryInsPkgName] [nvarchar] (MAX) NOT NULL
+	,[ProcCode] [nvarchar] (MAX) NOT NULL
+	,[PatientSex] [nvarchar] (MAX) NOT NULL
+	,[Race] [nvarchar] (MAX) NOT NULL
+	,[Ethnicity] [nvarchar] (MAX) NOT NULL
+	,[PatientLang] [nvarchar] (MAX) NOT NULL
+	,[PatientAddress1] [nvarchar] (MAX) NOT NULL
+	,[PatientCity] [nvarchar] (MAX) NOT NULL
+	,[PatientState] [nvarchar] (MAX) NOT NULL
+	,[CurrDeptBillName] [nvarchar] (MAX) NOT NULL
+	,[CurrDeptNpiNo] [nvarchar] (MAX) NOT NULL
+	,[ApptId] [nvarchar] (MAX) NOT NULL
+	,[ApptCheckOutDate] [nvarchar] (MAX) NOT NULL
+	,[PtntDcsdYsn] [nvarchar] (MAX) NOT NULL
+	,[PatientMaritalStatus] [nvarchar] (MAX) NOT NULL
+	,[FullFileName] [nvarchar] (MAX) NOT NULL
+ CONSTRAINT [pk_nrcInputFile] PRIMARY KEY CLUSTERED 
+(
+	[InputFileID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]

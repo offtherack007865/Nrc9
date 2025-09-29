@@ -1,0 +1,3 @@
+-- SQL Server Instance:  smg-sql01
+-- Apply to Utilities
+CREATE SCHEMA nrc;

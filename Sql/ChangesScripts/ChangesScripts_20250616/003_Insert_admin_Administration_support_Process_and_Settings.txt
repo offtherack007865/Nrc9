@@ -1,0 +1,368 @@
+-- SQL Service Instance:  smg-sql01
+/*	
+    [ReadDirectory] [nvarchar] (200) NOT NULL
+	,[InputArchiveDirectory] [nvarchar] (200) NOT NULL
+	,[OutputArchiveDirectory] [nvarchar] (200) NOT NULL
+	,[FilenameContainsString] [nvarchar] (200) NOT NULL
+	,[LineWhereDataStarts] [int] NOT NULL 
+	,[BaseWebApiUrl] [nvarchar] (200) NOT NULL 
+	,[BulkInsertBaseWebApiUrl] [nvarchar] (200) NOT NULL 
+	,[BulkInsertConnectionString] [nvarchar] (200) NOT NULL 
+	,[BulkInsertDbName] [nvarchar] (200) NOT NULL 
+	,[BulkInsertDbTableName] [nvarchar] (200) NOT NULL 
+    ,[ToEmailAddressList] [nvarchar] (200) NOT NULL 
+	,[EmailBaseWebApiUrl] [nvarchar] (200) NOT NULL 
+	,[EmailFromAddress] [nvarchar] (200) NOT NULL 
+*/
+USE [Administration];
+
+
+DECLARE @MyApplicationID [int] = 0;
+
+-- If Application ID exists, delete both the Process ID and its associated Settings.
+SELECT @MyApplicationID = [ApplicationID]
+  FROM [admin].[Application]
+  WHERE [ApplicationName] = 'Nrc';
+  
+IF (@MyApplicationID IS NULL OR @MyApplicationID = 0) BEGIN
+  print ('Insert Application');
+  INSERT INTO [admin].[Application]
+           ([ApplicationName]
+           ,[Description]
+           ,[NotificationOnError]
+           ,[NotificationGroupID]
+           ,[Notes]
+           ,[Visible]
+           ,[ListOrder]
+           ,[Active]
+           ,[InsertedBy]
+           ,[InsertedDate]
+           ,[UpdatedBy]
+           ,[UpdatedDate])
+     VALUES
+           ('Nrc'
+           ,'Nrc'
+           ,0
+           ,null
+           ,null
+           ,1
+           ,550
+           ,1
+           ,'pwmorrison'
+           ,getdate()
+           ,'pwmorrison'
+           ,getdate());
+		   
+SELECT @MyApplicationID = [ApplicationID]
+  FROM [admin].[Application]
+  WHERE [ApplicationName] = 'Nrc';
+		   
+END
+
+DECLARE @MyProcessID [int] = 0;
+
+-- If Process ID exists, delete both the Process ID and its associated Settings.
+SELECT @MyProcessID = [ProcessID]
+  FROM [support].[Process]
+  WHERE [Name] = 'ImportAndConvert'
+    AND [ApplicationID] = @MyApplicationID;  
+  
+IF (@MyProcessID IS NOT NULL) BEGIN
+  DELETE [support].[Setting]
+   WHERE [ApplicationID] = @MyApplicationID
+     AND [ProcessID] = @MyProcessID;
+	 
+  DELETE [support].[Process]
+   WHERE [ApplicationID] = @MyApplicationID
+     AND [ProcessID] = @MyProcessID;
+	 
+END
+  
+-- Insert Process 
+INSERT INTO [support].[Process]
+           ([ApplicationID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[NotificationOnError]
+           ,[NotificationGroupID]
+           ,[Visible]
+           ,[ListOrder]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,'ImportAndConvert'
+           ,'Reporting' 
+           ,'ImportAndConvert'
+           ,0
+           ,NULL
+           ,1
+           ,0 
+           ,1);		   
+  print 'Set process'
+
+-- Find newly inserted process ID
+SET @MyProcessID = NULL;
+SELECT @MyProcessID = [ProcessID]
+  FROM [support].[Process]
+  WHERE [Name] = 'ImportAndConvert'
+    AND [ApplicationID] = @MyApplicationID;  
+IF (@MyProcessID IS NULL) BEGIN
+  print 'Process ID not there.'
+  RETURN;
+END 
+
+print 'ApplicationId = ' + convert([nvarchar] (20), @MyApplicationID)
+print 'ProcessId = ' + convert([nvarchar] (20), @MyProcessID)
+
+/*	
+    [ReadDirectory] [nvarchar] (200) NOT NULL
+	,[InputArchiveDirectory] [nvarchar] (200) NOT NULL
+	,[OutputArchiveDirectory] [nvarchar] (200) NOT NULL
+	,[FilenameContainsString] [nvarchar] (200) NOT NULL
+	,[LineWhereDataStarts] [int] NOT NULL 
+	,[BaseWebApiUrl] [nvarchar] (200) NOT NULL 
+	,[BulkInsertBaseWebApiUrl] [nvarchar] (200) NOT NULL 
+	,[BulkInsertConnectionString] [nvarchar] (200) NOT NULL 
+	,[BulkInsertDbName] [nvarchar] (200) NOT NULL 
+	,[BulkInsertDbTableName] [nvarchar] (200) NOT NULL 
+    ,[ToEmailAddressList] [nvarchar] (200) NOT NULL 
+	,[EmailBaseWebApiUrl] [nvarchar] (200) NOT NULL 
+	,[EmailFromAddress] [nvarchar] (200) NOT NULL 
+*/
+
+-- ReadDirectory
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'ReadDirectory'
+           ,'Default'
+           ,''
+           ,'\\ps-nas\NAS\SSS\HUMANRS\Patient Experience\Nrc'
+           ,1);
+
+-- InputArchiveDirectory
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'InputArchiveDirectory'
+           ,'Default'
+           ,''
+           ,'\\ps-nas\NAS\SSS\HUMANRS\Patient Experience\Nrc\InputArchive'
+           ,1);
+
+-- OutputArchiveDirectory
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'OutputArchiveDirectory'
+           ,'Default'
+           ,''
+           ,'\\ps-nas\NAS\SSS\HUMANRS\Patient Experience\Nrc\OutputArchive'
+           ,1);
+
+-- FilenameContainsString
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'FilenameContainsString'
+           ,'Default'
+           ,''
+           ,'Survey'
+           ,1);
+
+-- LineWhereDataStarts
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'LineWhereDataStarts'
+           ,'Default'
+           ,''
+           ,'3'
+           ,1);
+
+-- BaseWebApiUrl
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'BaseWebApiUrl'
+           ,'Default'
+           ,''
+           ,'http://webservices:3388'
+           ,1);
+
+-- BulkInsertBaseWebApiUrl
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'BulkInsertBaseWebApiUrl'
+           ,'Default'
+           ,''
+           ,'http://webservices:5559'
+           ,1);
+
+-- BulkInsertConnectionString
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'BulkInsertConnectionString'
+           ,'Default'
+           ,''
+           ,'Data Source=vs-dev-db;Initial Catalog=Staging;TrustServerCertificate=True;Integrated Security=False;User ID=AppUser;Password=SoMm1t!@'
+           ,1);
+		   
+-- BulkInsertDbName
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'BulkInsertDbName'
+           ,'Default'
+           ,''
+           ,'Staging'
+           ,1);
+
+-- BulkInsertDbTableName
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'BulkInsertDbTableName'
+           ,'Default'
+           ,''
+           ,'nrc.AthenaInputFileForThisNrcRun'
+           ,1);  
+		   
+-- ToEmailAddressList
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'ToEmailAddressList'
+           ,'Default'
+           ,''
+           ,'pwmorrison@summithealthcare.com'
+           ,1);  
+		   
+		   
+-- EmailBaseWebApiUrl
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'EmailBaseWebApiUrl'
+           ,'Default'
+           ,''
+           ,'http://webservices:5570/api/EmailWebApi/SendEmailWithHtmlStringInput'
+           ,1);  
+
+		   
+-- EmailFromAddress
+INSERT INTO [support].[Setting]
+           ([ApplicationID]
+           ,[ProcessID]
+           ,[Name]
+           ,[Type]
+           ,[Description]
+           ,[Value]
+           ,[Active])
+     VALUES
+           (@MyApplicationID
+           ,@MyProcessID
+           ,'EmailFromAddress'
+           ,'Default'
+           ,''
+           ,'smgapplications@summithealthcare.com'
+           ,1);  

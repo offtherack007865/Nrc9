@@ -1,0 +1,1 @@
+Scaffold-DbContext "Server=vs-dev-db;Database=Nrc;TrustServerCertificate=True;Trusted_Connection=true;" -t AthenaInputFileForThisNrcRunMaster Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Project "Nrc9.Data"

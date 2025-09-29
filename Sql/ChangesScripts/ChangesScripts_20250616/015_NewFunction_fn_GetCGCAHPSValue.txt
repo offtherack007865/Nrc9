@@ -1,0 +1,79 @@
+-- SQL Server Instance:  smg-sql01
+USE [Support]
+IF EXISTS (
+    SELECT * FROM sysobjects WHERE id = object_id(N'nrc.fn_GetCGCAHPSValue') 
+    AND xtype IN (N'FN', N'IF', N'TF')
+)
+    DROP FUNCTION [nrc].[fn_GetCGCAHPSValue]
+GO
+
+/* -----------------------------------------------------------------------------------------------------------
+   Function Name  :  nrc.fn_GetCGCAHPSValue
+   Business Analyis:
+   Project/Process :   
+   Description     :  If the inputImportFilename is a 'Clinics' file and not a 'Sleep Center' or an 'Express Clinics'
+                      file (the filename contains 'Survey Vitals Arrived Appointments').
+                        
+   Author          :   Philip Morrison
+   Create Date     :   6/13/2025 
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/13/2025  1.01.001   Philip Morrison    Created
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+
+-- create function scalar-valued udf
+CREATE FUNCTION [nrc].[fn_GetCGCAHPSValue]
+(
+  @inputImportFilename [varchar] (MAX)
+  ,@inputApptDate [datetime] = NULL
+) 
+RETURNS [nvarchar] (MAX)
+AS
+BEGIN
+   
+DECLARE @returnString [nvarchar](MAX) = '';
+
+DECLARE @apptDateDayOfWeek [int] = 0;
+DECLARE @existsApptDayOfWeekInRandomTable [int] = 0;
+
+
+SET @returnString = '';
+
+-- If the inputted import filename does not contain 'Survey Vitals Arrived Appointment'
+-- put out empty string.
+IF CHARINDEX('Survey Vitals Arrived Appointment', @inputImportFilename) = 0 BEGIN
+   SET @returnString = '';
+   RETURN @returnString;
+END
+
+-- If the inputted Appt Date came in null, return empty string.
+IF @inputApptDate IS NULL BEGIN
+   SET @returnString = '';
+   RETURN @returnString;
+END
+
+
+-- if the Week Day value for the appt date is in the random weekday table, output yes.
+SET @apptDateDayOfWeek = DATEPART(dw, @inputApptDate);
+SELECT @existsApptDayOfWeekInRandomTable = [ExtraSurveyQuestionWorkDay]
+FROM [Nrc].[nrc].[ExtraSurveyQuestionWorkDays]
+WHERE [ExtraSurveyQuestionWorkDay] = @apptDateDayOfWeek;
+
+IF @existsApptDayOfWeekInRandomTable IS NOT NULL BEGIN 
+  SET @returnString = 'yes'
+END
+
+-- otherwise, CGCAHPS = no
+ELSE BEGIN
+  SET @returnString = 'no'   
+END
+
+RETURN @returnString;
+
+END

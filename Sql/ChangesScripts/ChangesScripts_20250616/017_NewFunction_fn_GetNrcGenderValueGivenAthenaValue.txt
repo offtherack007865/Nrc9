@@ -1,0 +1,73 @@
+-- SQL Server Instance:  smg-sql01
+USE [Support]
+IF EXISTS (
+    SELECT * FROM sysobjects WHERE id = object_id(N'nrc.fn_GetNrcGenderValueGivenAthenaValue') 
+    AND xtype IN (N'FN', N'IF', N'TF')
+)
+    DROP FUNCTION [nrc].[fn_GetNrcGenderValueGivenAthenaValue]
+GO
+
+/* -----------------------------------------------------------------------------------------------------------
+   Function Name  :  nrc.fn_GetNrcGenderValueGivenAthenaValue
+   Business Analyis:
+   Project/Process :   
+   Description     :  If the inputted Athena Gender Value is either blank or does not exist in the GenderCrossWalk table,
+                      output Error Message along with the default NRC Value.  The calling procedure will parse the default value
+					  from this message.  If the inputted Athena Gender does exist in that table, output the corresponding 
+					  NrcValue.
+                        
+   Author          :   Philip Morrison
+   Create Date     :   6/13/2025  
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/13/2025  1.01.001   Philip Morrison    Created
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+
+-- create function scalar-valued udf
+CREATE FUNCTION [nrc].[fn_GetNrcGenderValueGivenAthenaValue]
+(
+  @inputAthenaGenderValue [varchar] (100)
+) 
+RETURNS [nvarchar] (100)
+AS
+BEGIN
+   
+DECLARE @returnString [nvarchar](100) = '';
+
+-- If the inputted Gender value is blanks, merely put out the default value.
+
+if (LEN(ltrim(rtrim(@inputAthenaGenderValue))) = 0) BEGIN
+   SET @returnString = 'U';
+   RETURN @returnString;
+END
+
+DECLARE @existsAthenaValue [varchar] (100) = null;
+DECLARE @existsNrcValue [varchar] (100) = null;
+
+-- Look up the inputted Athena value in the GenderCrossWalk table.
+
+SELECT @existsAthenaValue = [AthenaValue]
+       ,@existsNrcValue = [NrcValue]
+FROM [Nrc].[nrc].[GenderCrossWalk]
+WHERE [AthenaValue] = @inputAthenaGenderValue;
+
+-- If the inputted Athena value does not exist, put out the error message with the default value.
+
+IF (@existsAthenaValue IS NULL) BEGIN
+   SET @returnString = '*** No Athena Value ' + @inputAthenaGenderValue + ' exists.  Default value is U'
+   RETURN @returnString;
+END
+
+-- If the inputted Athena value does exist in the table, put out the error message with the default value.
+
+SET @returnString = @existsNrcValue;
+
+RETURN @returnString;
+
+END

@@ -1,0 +1,68 @@
+-- SQL Instance Name:  smg-sql01
+USE [Nrc];
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'AthenaInputFileForThisNrcRunHistory' AND TABLE_SCHEMA = 'nrc')
+   DROP TABLE [nrc].[AthenaInputFileForThisNrcRunHistory];
+GO
+/* -----------------------------------------------------------------------------------------------------------
+   Table Name  :  nrc.AthenaInputFileForThisNrcRunHistory
+   Business Analyis:
+   Project/Process :   
+   Description     :  The MasterAthena Source input file data history.
+                        
+   Author          :   Philip Morrison
+   Create Date     :   6/13/2025 
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/13/2025  1.01.001   Philip Morrison    Created
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+
+CREATE TABLE [nrc].[AthenaInputFileForThisNrcRunHistory](
+    [AthenaInputFileForThisNrcRunHistoryID] [int] IDENTITY ( 1, 1 ) NOT NULL
+	,[PatientFirstName] [nvarchar] (300) NOT NULL
+	,[PatientLastName] [nvarchar] (300) NOT NULL
+	,[PatientEmail] [nvarchar] (300) NULL
+	,[PatientHomePhone] [nvarchar] (20) NULL
+	,[PatientMobileNo] [nvarchar] (20) NULL
+	,[ApptDate] [datetime] NULL
+	,[PatientDob] [datetime] NULL
+    ,[patientZip] [nvarchar] (20) NULL	
+	,[RndrngPrvdrFrstNme] [nvarchar] (300) NULL
+	,[RndrngPrvdrLstNme] [nvarchar] (300) NULL
+	,[RndrngPrvdrType] [nvarchar] (300) NULL	
+	,[RndrngPrvdrNpiNo] [nvarchar] (30) NULL	
+	,[PatientPrimaryInsHldrFi] [nvarchar] (300) NULL	
+	,[PatientPrimaryInsHldrLa] [nvarchar] (300) NULL		
+	,[GuarantorPhone] [nvarchar] (30) NULL		
+	,[GuarantorEmail] [nvarchar] (300) NULL			
+	,[SvcDeptId] [nvarchar] (20) NULL		
+	,[SvcDprtmnt] [nvarchar] (20) NULL		
+	,[PatientId] [nvarchar] (20) NULL		
+	,[PatientPrimaryInsPkgType] [nvarchar] (300) NULL
+	,[PatientPrimaryInsPkgName] [nvarchar] (300) NULL
+	,[ProcCode] [nvarchar] (30) NULL
+	,[PatientSex] [nvarchar] (20) NULL
+	,[Race] [nvarchar] (100) NULL
+	,[Ethnicity] [nvarchar] (100) NULL
+	,[PatientLang] [nvarchar] (100) NULL
+	,[PatientAddress1] [nvarchar] (300) NULL
+	,[PatientCity] [nvarchar] (300) NULL
+	,[PatientState] [nvarchar] (30) NULL
+	,[CurrDeptBillName] [nvarchar] (300) NULL
+	,[CurrDeptNpiNo] [nvarchar] (30) NULL
+	,[ApptId] [nvarchar] (30) NULL
+	,[ApptCheckOutDate] [datetime] NULL
+	,[PtntDcsdYsn] [nvarchar] (100) NULL
+	,[PatientMaritalStatus] [nvarchar] (100) NULL
+
+	,[FullFileName] [varchar](300) NOT NULL
+ CONSTRAINT [pk_nrcAthenaInputFileForThisNrcRunHistory] PRIMARY KEY CLUSTERED 
+(
+	[AthenaInputFileForThisNrcRunHistoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]

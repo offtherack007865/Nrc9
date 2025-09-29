@@ -1,0 +1,82 @@
+-- SQL Instance Name:  smg-sql01
+USE [CUSTOMERSURVEY];
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'OutputFile' AND TABLE_SCHEMA = 'nrc')
+   DROP TABLE [nrc].[OutputFile];
+GO
+/* -----------------------------------------------------------------------------------------------------------
+   Table Name  :  nrc.OutputFile
+   Business Analyis:
+   Project/Process :   
+   Description     :  The output file for NRC Today.
+                        
+   Author          :   Philip Morrison
+   Create Date     :   6/23/2025 
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/23/2025  1.01.001   Philip Morrison    Created
+   6/26/2025  1.01.002   Philip Morrison    Changed Database name and Table Name to meet DBA standards.   
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+
+CREATE TABLE [nrc].[OutputFile](
+    [OutputFileID] [int] IDENTITY ( 1, 1 ) NOT NULL
+     ,[PatientNameGiven] [varchar](200) NOT NULL
+	 ,[PatientNameFamily] [varchar](200) NOT NULL	
+	 ,[AddressStreet1] [varchar](200) NOT NULL
+     ,[AddressCity] [varchar](200) NOT NULL
+     ,[AddressState] [varchar](200) NOT NULL
+	 ,[AddressPostalCode] [varchar](20) NOT NULL
+	 ,[PhoneAreaCityCode] [varchar](20) NOT NULL
+	 ,[PhoneLocalNumber] [varchar](20) NOT NULL
+	 ,[MRN] [varchar](30) NOT NULL
+	 ,[DateOfBirth] [datetime] NOT NULL
+	 ,[AdministrativeSex] [varchar](20) NOT NULL
+	 ,[PrimaryLanguage] [varchar](200) NOT NULL
+	 ,[Race] [varchar](200) NOT NULL
+     ,[EthnicGroup] [varchar](200) NOT NULL
+	 ,[MaritalStatus] [varchar](200) NOT NULL
+	 ,[Email] [varchar](200) NOT NULL
+	 ,[PatientClass] [varchar](200) NOT NULL
+	 ,[FacilityName] [varchar](200) NOT NULL
+	 ,[FacilityNumber] [varchar](200) NOT NULL
+	 ,[VisitNumber] [varchar](20) NOT NULL
+	 ,[AdmitDateTime] [datetime] NOT NULL
+	 ,[DischargeDateTime] [datetime] NOT NULL
+	 ,[AdmitSource] [varchar](200) NOT NULL
+     ,[DischargeStatus] [varchar](200) NOT NULL
+	 ,[LocationCriteria] [varchar](200) NOT NULL
+	 ,[Location] [varchar](200) NOT NULL
+	 ,[MSDRG] [varchar](200) NOT NULL
+	 ,[DiagnosisPrimaryICD10] [varchar](30) NOT NULL
+	 ,[Diagnosis2ICD10] [varchar](30) NOT NULL
+     ,[Diagnosis3ICD10] [varchar](30) NOT NULL
+	 ,[IsDeceased] [varchar](30) NOT NULL
+	 ,[ICU] [varchar](30) NOT NULL
+	 ,[EDAdmit] [varchar](200) NOT NULL
+     ,[PrimaryPayerID] [varchar](20) NOT NULL
+	 ,[PrimaryPayerName] [varchar](200) NOT NULL
+	 ,[AttendingDoctorNameGiven] [varchar](200) NOT NULL
+	 ,[AttendingDoctorNameSecondGiven] [varchar](200) NOT NULL
+     ,[AttendingDoctorNameFamily] [varchar](200) NOT NULL
+     ,[AttendingDoctorNameSuffix] [varchar](200) NOT NULL
+	 ,[AttendingDoctorDegree] [varchar](200) NOT NULL
+     ,[AttendingDoctorNPI] [varchar](200) NOT NULL
+	 ,[AttendingDoctorSpecialty] [varchar](200) NOT NULL
+     ,[ProcedurePrimaryCPT] [varchar](200) NOT NULL
+     ,[Procedure2CPT] [varchar](200) NOT NULL
+     ,[Procedure3CPT] [varchar](200) NOT NULL
+     ,[HNumIPDisch] [varchar](200) NOT NULL
+     ,[PreferredOutreachMode] [varchar](200) NOT NULL 
+	,[OutputFullFileName] [varchar](2000) NOT NULL
+	,[ImportFullFileName] [varchar](2000) NOT NULL
+    ,[CGCAHPS] [varchar] (30) NOT NULL
+ CONSTRAINT [pk_nrcOutputFile] PRIMARY KEY CLUSTERED 
+(
+	[OutputFileID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]

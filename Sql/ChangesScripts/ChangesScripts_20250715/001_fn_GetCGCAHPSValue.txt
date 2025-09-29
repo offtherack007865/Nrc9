@@ -1,0 +1,113 @@
+-- SQL Server Instance:  smg-sql01
+USE [Support]
+IF EXISTS (
+    SELECT * FROM sysobjects WHERE id = object_id(N'nrc.fn_GetCGCAHPSValue') 
+    AND xtype IN (N'FN', N'IF', N'TF')
+)
+    DROP FUNCTION [nrc].[fn_GetCGCAHPSValue]
+GO
+
+/* -----------------------------------------------------------------------------------------------------------
+   Function Name  :  nrc.fn_GetCGCAHPSValue
+   Business Analyis:
+   Project/Process :   
+   Description     :  If the inputImportFilename is a 'Clinics' file and not a 'Sleep Center' or an 'Express Clinics'
+                      file (the filename contains 'Survey Vitals Arrived Appointments').
+                        
+   Author          :   Philip Morrison
+   Create Date     :   6/13/2025 
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/13/2025  1.01.001   Philip Morrison    Created
+   6/26/2025  1.01.002   Philip Morrison    Changed Database name and Table Name to meet DBA standards.   
+   7/8/2025   1.01.003   Philip Morrison    Changed CGCAHPS filename indicator from 'Survey...' to 
+                                            'NRC Arrived Appointments_'.   
+   7/15/2025  1.01.004  Philip Morrison     Initialize the exists value, @existsApptDayOfWeekInRandomTable, to NULL
+                                            Adjust WeekDay value of inputted date to be the "workday of the week" value.
+                                            Monday = 1
+                                            Tuesday = 2
+                                            Wednesday = 3
+                                            Thursday = 4
+                                            Friday = 5
+                                            Saturday = 0
+                                            Sunday = 0
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+
+-- create function scalar-valued udf
+CREATE FUNCTION [nrc].[fn_GetCGCAHPSValue]
+(
+  @inputImportFilename [varchar] (MAX)
+  ,@inputApptDate [datetime] = NULL
+) 
+RETURNS [nvarchar] (MAX)
+AS
+BEGIN
+   
+DECLARE @returnString [nvarchar](MAX) = '';
+
+DECLARE @apptDateWorkDayOfWeek [int] = 0;
+DECLARE @existsApptDayOfWeekInRandomTable [int] = 0;
+
+
+SET @returnString = '';
+
+-- If the inputted import filename does not contain 'NRC Arrived Appointments_'
+-- put out empty string.
+IF CHARINDEX('NRC Arrived Appointments_', @inputImportFilename) = 0 BEGIN
+   SET @returnString = '';
+   RETURN @returnString;
+END
+
+-- If the inputted Appt Date came in null, return empty string.
+IF @inputApptDate IS NULL BEGIN
+   SET @returnString = '';
+   RETURN @returnString;
+END
+
+-- Adjust WeekDay value of inputted date to be the "workday of the week" value.
+-- Monday = 1
+-- Tuesday = 2
+-- Wednesday = 3
+-- Thursday = 4
+-- Friday = 5
+-- Saturday = 0
+-- Sunday = 0
+SET @apptDateWorkDayOfWeek = 
+  CASE WHEN DATEPART(dw, @inputApptDate) = 2 THEN 1 
+	   WHEN DATEPART(dw, @inputApptDate) = 3 THEN 2 
+	   WHEN DATEPART(dw, @inputApptDate) = 4 THEN 3 
+	   WHEN DATEPART(dw, @inputApptDate) = 5 THEN 4 
+	   WHEN DATEPART(dw, @inputApptDate) = 6 THEN 5
+	   ELSE 0
+  END;
+
+-- Initialize the exists value, @existsApptDayOfWeekInRandomTable, to NULL
+SET @existsApptDayOfWeekInRandomTable = NULL;
+
+-- If the "Work day of the week" (1-5) of the inputted date is one of the three
+-- randomly generated values in the ExtraSurveyQuestionWorkDays table, 
+SELECT @existsApptDayOfWeekInRandomTable = [ExtraSurveyQuestionWorkDay]
+FROM [CUSTOMERSURVEY].[nrc].[ExtraSurveyQuestionWorkDays]
+WHERE [ExtraSurveyQuestionWorkDay] = @apptDateWorkDayOfWeek;
+
+
+-- If the "Work day of the week" (1-5) of the inputted date is one of the three
+-- randomly generated values in the ExtraSurveyQuestionWorkDays table, return 'yes'. 
+IF @existsApptDayOfWeekInRandomTable IS NOT NULL BEGIN 
+  SET @returnString = 'yes'
+END
+
+-- otherwise, return 'no'
+ELSE BEGIN
+  SET @returnString = 'no'   
+END
+
+RETURN @returnString;
+
+END

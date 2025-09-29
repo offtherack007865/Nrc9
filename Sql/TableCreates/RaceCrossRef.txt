@@ -1,0 +1,59 @@
+-- SQL Instance Name:  smg-sql01
+USE [Support];
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'RaceCrossRef' AND TABLE_SCHEMA = 'nrc')
+   DROP TABLE [nrc].[RaceCrossRef];
+GO
+/* -----------------------------------------------------------------------------------------------------------
+   Table Name  :  nrc.RaceCrossRef
+   Business Analyis:
+   Project/Process :   
+   Description     :  The Cross-Walk table for converting Athena Race to NRC format.
+                        
+   Author          :   Philip Morrison
+   Create Date     :   6/23/2025 
+
+   ***********************************************************************************************************
+   **         Change History                                                                                **
+   ***********************************************************************************************************
+
+   Date       Version    Author             Description
+   --------   --------   -----------        ------------
+   6/23/2025 1.01.001   Philip Morrison    Created
+   6/26/2025 1.01.002   Philip Morrison    Changed Database name and Table Name to meet DBA standards.   
+*/ -----------------------------------------------------------------------------------------------------------                                   
+
+
+CREATE TABLE [nrc].[RaceCrossRef](
+    [RaceCrossRefID] [int] IDENTITY ( 1, 1 ) NOT NULL
+	,[AthenaValue] [nvarchar] (MAX) NOT NULL
+	,[NrcValue] [nvarchar] (MAX) NOT NULL
+ CONSTRAINT [pk_nrcRaceCrossRef] PRIMARY KEY CLUSTERED 
+(
+	[RaceCrossRefID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+INSERT INTO [nrc].[RaceCrossRef] VALUES('African American','2054-5');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('American Indian','1002-5');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('American Indian or Alaska Native','1002-5');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Apache','1002-5');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Arab','2118-8');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Asian','2028-9');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Asian Indian','2029-7');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Black','2054-5');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Black or African American','2054-5');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('European','2106-3');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Irish','2106-3');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Italian','2106-3');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Middle Eastern or North African','2118-8');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Native Hawaiian or Other Pacific Islander','2076-8');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Other Pacific Islander','2076-8');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Other Race','2131-1');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Patient Declined','0000-1');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Scottish','2106-3');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('Vietnamese','2028-9');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('White','2106-3');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('White Earth','2106-3');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('White Earth','2106-3');
+INSERT INTO [nrc].[RaceCrossRef] VALUES('White Mountain Apache','1002-5');

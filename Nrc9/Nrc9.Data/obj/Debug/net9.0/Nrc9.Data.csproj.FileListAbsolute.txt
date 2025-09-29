@@ -1,0 +1,12 @@
+D:\source\repos\nrc\Nrc9\Nrc9.Data\bin\Debug\net9.0\Nrc9.Data.deps.json
+D:\source\repos\nrc\Nrc9\Nrc9.Data\bin\Debug\net9.0\Nrc9.Data.dll
+D:\source\repos\nrc\Nrc9\Nrc9.Data\bin\Debug\net9.0\Nrc9.Data.pdb
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\Nrc9.Data.csproj.AssemblyReference.cache
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\Nrc9.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\Nrc9.Data.AssemblyInfoInputs.cache
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\Nrc9.Data.AssemblyInfo.cs
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\Nrc9.Data.csproj.CoreCompileInputs.cache
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\Nrc9.Data.dll
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\refint\Nrc9.Data.dll
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\Nrc9.Data.pdb
+D:\source\repos\nrc\Nrc9\Nrc9.Data\obj\Debug\net9.0\ref\Nrc9.Data.dll

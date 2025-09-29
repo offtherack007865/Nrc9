@@ -1,0 +1,6 @@
+@Nrc9.WebApiLand_HostAddress = http://localhost:5045
+
+GET {{Nrc9.WebApiLand_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
