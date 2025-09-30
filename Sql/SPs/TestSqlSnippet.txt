@@ -1,0 +1,55 @@
+	  -- Instance Declarations.
+DECLARE @IsOk [bit] = 0;
+DECLARE @MyCount [int] = 0;
+DECLARE @IndividualImportFilename [nvarchar] (3000) = '';
+DECLARE @TwentyPercentOfMasterRecordCount [int] = 0;
+DECLARE @RandomlyGeneratedRecordID [int] = 0;
+DECLARE @ExistsRandomlyGeneratedRecordID [int] = 0;
+DECLARE @RandomlyGeneratedRecordIDCountSoFar [int] = 0;
+DECLARE @AnticipatedRecordCount [int] = 0;
+
+SET @AnticipatedRecordCount = 20;
+
+
+      -- Table variable to hold randomly generated record IDs within the range 1 and the anticipated record count
+      DECLARE @RandomRecordIDTable Table
+      (
+        [RandomRecordID] [int]
+      );
+      
+      -- Get the Import filename from the InputFileMaster
+      SELECT @IndividualImportFilename = MAX([FullFileName])
+        FROM [CUSTOMERSURVEY].[nrc].[InputFileMaster];
+      
+     -- If the inputted import filename contains 'NRC Arrived Appointments_'
+     -- randomly generate Record IDs between 1 and the anticipated record count.
+     IF CHARINDEX('NRC Arrived Appointments_', @inputImportFilename) > 0 BEGIN
+       -- Get the count of random record ids to generate.
+       SET @TwentyPercentOfMasterRecordCount = FLOOR((@AnticipatedRecordCount * .2),0);
+       
+       WHILE (1 = 1) BEGIN
+       
+         -- If we have the requisite number of randomly generated numbers, get out of the forever loop.
+         SELECT @RandomlyGeneratedRecordIDCountSoFar = COUNT(*)
+           FROM @RandomRecordIDTable;
+         IF (@RandomlyGeneratedRecordIDCountSoFar > @TwentyPercentOfMasterRecordCount) BEGIN
+           BREAK;
+         END 
+         
+         -- Randomly generate new Record ID
+         SELECT @RandomlyGeneratedRecordID = FLOOR(@AnticipatedRecordCount * RAND(), 0);
+         
+         -- Is the randomly generated record ID is already in the table, generate another.
+         SET @ExistsRandomlyGeneratedRecordID = NULL;
+         SELECT @ExistsRandomlyGeneratedRecordID = [RandomRecordID]
+           FROM @RandomRecordIDTable
+          WHERE @ExistsRandomlyGeneratedRecordID = @RandomlyGeneratedRecordID;
+          
+         -- If the randomly generated number is NOT already in the table, insert it.
+         IF (@ExistsRandomlyGeneratedRecordID IS NULL) BEGIN
+           INSERT INTO @RandomRecordIDTable
+           VALUES(@RandomlyGeneratedRecordID);
+         END
+       END
+     END
+      
