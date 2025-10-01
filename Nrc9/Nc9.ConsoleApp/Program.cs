@@ -114,62 +114,6 @@ namespace Nrc9.ConsoleApp
                 return;
             }
 
-            // Truncate WorkDays table.
-            CallWebApiLandClass
-                myCallForTruncateWorkDays =
-                    new CallWebApiLandClass
-                        (
-                            myConfigOptions.BaseWebUrl
-                        );
-
-            dd_ExtraSurveyQuestionWorkDaysOutput
-                 mydd_ExtraSurveyQuestionWorkDaysOutput =
-                    myCallForTruncateWorkDays
-                    .dd_ExtraSurveyQuestionWorkDays();
-            if (!mydd_ExtraSurveyQuestionWorkDaysOutput.IsOk ||
-                mydd_ExtraSurveyQuestionWorkDaysOutput.dd_ExtraSurveyQuestionWorkDaysOutputColumnsList.Count != 1)
-            {
-                log.Error($"We had an error in trying to execute dd_ExtraSurveyQuestionWorkDays:  {mydd_ExtraSurveyQuestionWorkDaysOutput.ErrorMessage}");
-                return;
-            }
-
-
-
-            // Generate 1 number between 1 and 5 which represent
-            // Monday through Friday.
-            ExtraSurveyQuestion3Of5Workdays
-                my3Of5Workdays =
-                    new ExtraSurveyQuestion3Of5Workdays();
-            my3Of5Workdays.RandomlyGenerate();
-            if (my3Of5Workdays.ExtraSurveyQuestionWorkDayList.Count != 1)
-            {
-                log.Error($"my3Of5Workdays.ExtraSurveyQuestionWorkDayList Should have 3 entries.");
-                return;
-            }
-
-            foreach (int loopWorkDay in my3Of5Workdays.ExtraSurveyQuestionWorkDayList)
-            {
-                // Insert randomly generated number between 1 and 5 into workday table.
-                CallWebApiLandClass
-                    myCallForInsertWorkDays =
-                        new CallWebApiLandClass
-                            (
-                                myConfigOptions.BaseWebUrl
-                            );
-
-                di_ExtraSurveyQuestionWorkDaysOutput
-                     mydi_ExtraSurveyQuestionWorkDaysOutput =
-                        myCallForInsertWorkDays
-                        .di_ExtraSurveyQuestionWorkDays(loopWorkDay);
-                if (!mydi_ExtraSurveyQuestionWorkDaysOutput.IsOk ||
-                    mydi_ExtraSurveyQuestionWorkDaysOutput.di_ExtraSurveyQuestionWorkDaysOutputColumnsList.Count != 1)
-                {
-                    log.Error($"We had an error in trying to execute di_ExtraSurveyQuestionWorkDays:  {mydi_ExtraSurveyQuestionWorkDaysOutput.ErrorMessage}");
-                    return;
-                }
-            }
-
-
             // Main Operations.
             MainOps
                 myMainOps =

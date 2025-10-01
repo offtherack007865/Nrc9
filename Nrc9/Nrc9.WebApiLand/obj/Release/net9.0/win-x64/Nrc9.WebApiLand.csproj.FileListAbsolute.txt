@@ -471,3 +471,4 @@ D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\win-x64\refint\Nrc9.
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\win-x64\Nrc9.WebApiLand.pdb
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\win-x64\Nrc9.WebApiLand.genruntimeconfig.cache
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\win-x64\ref\Nrc9.WebApiLand.dll
+D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\win-x64\Nrc9.WebApiLand.sourcelink.json

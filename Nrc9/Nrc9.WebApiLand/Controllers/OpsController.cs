@@ -36,6 +36,7 @@ namespace Nrc9.WebApiLand.Controllers
                       , [FromQuery] string inputUser
                     )
         {
+            
             qy_GetNrcConfigOutput
                 returnOutput =
                     new qy_GetNrcConfigOutput();
@@ -273,95 +274,5 @@ namespace Nrc9.WebApiLand.Controllers
         }
 
 
-        // GET /api/Ops/dd_ExtraSurveyQuestionWorkDays
-        [HttpGet]
-        public dd_ExtraSurveyQuestionWorkDaysOutput
-                    dd_ExtraSurveyQuestionWorkDays()
-        {
-            dd_ExtraSurveyQuestionWorkDaysOutput
-                returnOutput =
-                    new dd_ExtraSurveyQuestionWorkDaysOutput();
-
-            string sql = $"nrc.dd_ExtraSurveyQuestionWorkDays";
-
-            List<SqlParameter> parms = new List<SqlParameter>();
-
-            try
-            {
-                returnOutput.dd_ExtraSurveyQuestionWorkDaysOutputColumnsList =
-                    MyContext
-                    .dd_ExtraSurveyQuestionWorkDaysOutputColumnsList
-                    .FromSqlRaw<dd_ExtraSurveyQuestionWorkDaysOutputColumns>
-                    (
-                          sql
-                        , parms.ToArray()
-                    )
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                returnOutput.IsOk = false;
-
-                string myErrorMessage = ex.Message;
-                if (ex.InnerException != null)
-                {
-                    myErrorMessage = $"{myErrorMessage}.  InnerException:  {ex.InnerException.Message}";
-                }
-                returnOutput.ErrorMessage = myErrorMessage;
-                return returnOutput;
-            }
-            return returnOutput;
-        }
-
-        // GET /api/Ops/di_ExtraSurveyQuestionWorkDays?inputWorkDay=2
-        [HttpGet]
-        public di_ExtraSurveyQuestionWorkDaysOutput
-                    di_ExtraSurveyQuestionWorkDays(int inputWorkDay)
-        {
-            di_ExtraSurveyQuestionWorkDaysOutput
-                returnOutput =
-                    new di_ExtraSurveyQuestionWorkDaysOutput();
-
-            string sql = $"nrc.di_ExtraSurveyQuestionWorkDays @inputWorkDay";
-
-            List<SqlParameter> parms = new List<SqlParameter>();
-
-            // @inputWorkDay
-            SqlParameter parm =
-                new SqlParameter
-                {
-                    ParameterName = "@inputWorkDay",
-                    SqlDbType = System.Data.SqlDbType.Int,
-                    Value = inputWorkDay
-                };
-            parms.Add(parm);
-
-            try
-            {
-                returnOutput.di_ExtraSurveyQuestionWorkDaysOutputColumnsList =
-                    MyContext
-                    .di_ExtraSurveyQuestionWorkDaysOutputColumnsList
-                    .FromSqlRaw<di_ExtraSurveyQuestionWorkDaysOutputColumns>
-                    (
-                          sql
-                        , parms.ToArray()
-                    )
-                    .ToList();
-            }
-            catch (Exception ex)
-            {
-                returnOutput.IsOk = false;
-
-                string myErrorMessage = ex.Message;
-                if (ex.InnerException != null)
-                {
-                    myErrorMessage = $"{myErrorMessage}.  InnerException:  {ex.InnerException.Message}";
-                }
-                returnOutput.ErrorMessage = myErrorMessage;
-                return returnOutput;
-            }
-            return returnOutput;
-        
-        }
     }
 }

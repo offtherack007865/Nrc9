@@ -1,26 +1,6 @@
 [
   {
     "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
-    "Method": "dd_ExtraSurveyQuestionWorkDays",
-    "RelativePath": "api/Ops/dd_ExtraSurveyQuestionWorkDays",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "Nrc9.Data.Models.dd_ExtraSurveyQuestionWorkDaysOutput",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
     "Method": "dd_InputFile",
     "RelativePath": "api/Ops/dd_InputFile",
     "HttpMethod": "GET",
@@ -30,32 +10,6 @@
     "ReturnTypes": [
       {
         "Type": "Nrc9.Data.Models.dd_InputFileOutput",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Nrc9.WebApiLand.Controllers.OpsController",
-    "Method": "di_ExtraSurveyQuestionWorkDays",
-    "RelativePath": "api/Ops/di_ExtraSurveyQuestionWorkDays",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "inputWorkDay",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Nrc9.Data.Models.di_ExtraSurveyQuestionWorkDaysOutput",
         "MediaTypes": [
           "text/plain",
           "application/json",

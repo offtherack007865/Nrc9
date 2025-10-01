@@ -161,11 +161,13 @@ D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\Nrc9.WebApiLand.Assemb
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\Nrc9.WebApiLand.csproj.CoreCompileInputs.cache
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\Nrc9.WebApiLand.MvcApplicationPartsAssemblyInfo.cs
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\Nrc9.WebApiLand.MvcApplicationPartsAssemblyInfo.cache
+D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\Nrc9.WebApiLand.sourcelink.json
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\scopedcss\bundle\Nrc9.WebApiLand.styles.css
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\staticwebassets.build.json
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\staticwebassets.build.json.cache
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\staticwebassets.development.json
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\staticwebassets.build.endpoints.json
+D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\Nrc9.Web.CAD62CC2.Up2Date
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\Nrc9.WebApiLand.dll
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Debug\net9.0\refint\Nrc9.WebApiLand.dll

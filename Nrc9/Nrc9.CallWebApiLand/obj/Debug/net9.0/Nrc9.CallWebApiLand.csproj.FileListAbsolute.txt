@@ -13,3 +13,4 @@ D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLan
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\refint\Nrc9.CallWebApiLand.dll
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.pdb
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\ref\Nrc9.CallWebApiLand.dll
+D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.sourcelink.json

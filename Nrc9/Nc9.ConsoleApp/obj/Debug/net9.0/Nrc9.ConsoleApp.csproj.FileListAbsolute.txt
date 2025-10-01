@@ -96,3 +96,4 @@ D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Debug\net9.0\Nrc9.ConsoleApp.pdb
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Debug\net9.0\Nrc9.ConsoleApp.genruntimeconfig.cache
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Debug\net9.0\ref\Nrc9.ConsoleApp.dll
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\bin\Debug\net9.0\System.Text.Json.dll
+D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Debug\net9.0\Nrc9.ConsoleApp.sourcelink.json

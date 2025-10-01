@@ -161,6 +161,7 @@ D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\Nrc9.WebApiLand.Asse
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\Nrc9.WebApiLand.csproj.CoreCompileInputs.cache
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\Nrc9.WebApiLand.MvcApplicationPartsAssemblyInfo.cs
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\Nrc9.WebApiLand.MvcApplicationPartsAssemblyInfo.cache
+D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\Nrc9.WebApiLand.sourcelink.json
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\scopedcss\bundle\Nrc9.WebApiLand.styles.css
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\staticwebassets.build.json
 D:\source\repos\nrc\Nrc9\Nrc9.WebApiLand\obj\Release\net9.0\staticwebassets.build.json.cache

@@ -90,6 +90,7 @@ D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Release\net9.0\Nrc9.ConsoleApp.Gener
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Release\net9.0\Nrc9.ConsoleApp.AssemblyInfoInputs.cache
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Release\net9.0\Nrc9.ConsoleApp.AssemblyInfo.cs
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Release\net9.0\Nrc9.ConsoleApp.csproj.CoreCompileInputs.cache
+D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Release\net9.0\Nrc9.ConsoleApp.sourcelink.json
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Release\net9.0\Nrc9.Con.0FABE3F6.Up2Date
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Release\net9.0\Nrc9.ConsoleApp.dll
 D:\source\repos\nrc\Nrc9\Nc9.ConsoleApp\obj\Release\net9.0\refint\Nrc9.ConsoleApp.dll
