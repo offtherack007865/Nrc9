@@ -8,9 +8,9 @@ D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLan
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.AssemblyInfoInputs.cache
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.AssemblyInfo.cs
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.csproj.CoreCompileInputs.cache
+D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.sourcelink.json
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.Cal.8FA699E9.Up2Date
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.dll
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\refint\Nrc9.CallWebApiLand.dll
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.pdb
 D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\ref\Nrc9.CallWebApiLand.dll
-D:\source\repos\nrc\Nrc9\Nrc9.CallWebApiLand\obj\Debug\net9.0\Nrc9.CallWebApiLand.sourcelink.json

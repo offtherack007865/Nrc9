@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "D:\\source\\repos\\nrc\\Nrc9\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DF280B93-DE47-4F82-864C-527A73D40676}|Nrc9.WebApiLand\\Nrc9.WebApiLand.csproj|d:\\source\\repos\\nrc\\nrc9\\nrc9.webapiland\\controllers\\opscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DF280B93-DE47-4F82-864C-527A73D40676}|Nrc9.WebApiLand\\Nrc9.WebApiLand.csproj|solutionrelative:nrc9.webapiland\\controllers\\opscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|d:\\source\\repos\\nrc\\nrc9\\nc9.consoleapp\\mainops.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|solutionrelative:nc9.consoleapp\\mainops.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|d:\\source\\repos\\nrc\\nrc9\\nc9.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|solutionrelative:nc9.consoleapp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{17AEA75E-5B4F-49F2-BF55-A25DDA6B1EDD}|Nrc9.CallWebApiLand\\Nrc9.CallWebApiLand.csproj|d:\\source\\repos\\nrc\\nrc9\\nrc9.callwebapiland\\callwebapilandclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{17AEA75E-5B4F-49F2-BF55-A25DDA6B1EDD}|Nrc9.CallWebApiLand\\Nrc9.CallWebApiLand.csproj|solutionrelative:nrc9.callwebapiland\\callwebapilandclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|d:\\source\\repos\\nrc\\nrc9\\nc9.consoleapp\\getathenasourcefilelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|solutionrelative:nc9.consoleapp\\getathenasourcefilelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|d:\\source\\repos\\nrc\\nrc9\\nc9.consoleapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|solutionrelative:nc9.consoleapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{17AEA75E-5B4F-49F2-BF55-A25DDA6B1EDD}|Nrc9.CallWebApiLand\\Nrc9.CallWebApiLand.csproj|d:\\source\\repos\\nrc\\nrc9\\nrc9.callwebapiland\\callwebapilandclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{17AEA75E-5B4F-49F2-BF55-A25DDA6B1EDD}|Nrc9.CallWebApiLand\\Nrc9.CallWebApiLand.csproj|solutionrelative:nrc9.callwebapiland\\callwebapilandclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DF280B93-DE47-4F82-864C-527A73D40676}|Nrc9.WebApiLand\\Nrc9.WebApiLand.csproj|d:\\source\\repos\\nrc\\nrc9\\nrc9.webapiland\\controllers\\opscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF280B93-DE47-4F82-864C-527A73D40676}|Nrc9.WebApiLand\\Nrc9.WebApiLand.csproj|solutionrelative:nrc9.webapiland\\controllers\\opscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0FA04D65-79EA-41E8-8222-17D930D2BE86}|..\\..\\emailwebapiland9\\EmailWebApiLand9.CallEmailWebApiLand\\EmailWebApiLand9.CallEmailWebApiLand.csproj|d:\\source\\repos\\emailwebapiland9\\emailwebapiland9.callemailwebapiland\\callemailwebapiland.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -26,20 +34,12 @@
       "RelativeMoniker": "D:0:0:{DF280B93-DE47-4F82-864C-527A73D40676}|Nrc9.WebApiLand\\Nrc9.WebApiLand.csproj|solutionrelative:nrc9.webapiland\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|d:\\source\\repos\\nrc\\nrc9\\nc9.consoleapp\\mainops.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|solutionrelative:nc9.consoleapp\\mainops.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DF280B93-DE47-4F82-864C-527A73D40676}|Nrc9.WebApiLand\\Nrc9.WebApiLand.csproj|d:\\source\\repos\\nrc\\nrc9\\nrc9.webapiland\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DF280B93-DE47-4F82-864C-527A73D40676}|Nrc9.WebApiLand\\Nrc9.WebApiLand.csproj|solutionrelative:nrc9.webapiland\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F7D2576C-C3D6-444E-AFD8-DEA3F0558E99}|Nrc9.Data\\Nrc9.Data.csproj|d:\\source\\repos\\nrc\\nrc9\\nrc9.data\\models\\mainopsoutput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7D2576C-C3D6-444E-AFD8-DEA3F0558E99}|Nrc9.Data\\Nrc9.Data.csproj|solutionrelative:nrc9.data\\models\\mainopsoutput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|d:\\source\\repos\\nrc\\nrc9\\nc9.consoleapp\\getathenasourcefilelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|solutionrelative:nc9.consoleapp\\getathenasourcefilelist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BC39E6DB-E634-44C5-9EC9-F9DCEDDD45EA}|Nc9.ConsoleApp\\Nrc9.ConsoleApp.csproj|d:\\source\\repos\\nrc\\nrc9\\nc9.consoleapp\\readinconfigoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -68,7 +68,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 21,
           "Children": [
             {
               "$type": "Bookmark",
@@ -100,20 +100,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "CallWebApiLandClass.cs",
               "DocumentMoniker": "D:\\source\\repos\\nrc\\Nrc9\\Nrc9.CallWebApiLand\\CallWebApiLandClass.cs",
               "RelativeDocumentMoniker": "Nrc9.CallWebApiLand\\CallWebApiLandClass.cs",
               "ToolTip": "D:\\source\\repos\\nrc\\Nrc9\\Nrc9.CallWebApiLand\\CallWebApiLandClass.cs",
               "RelativeToolTip": "Nrc9.CallWebApiLand\\CallWebApiLandClass.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAuwEUAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAIAwwCoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-01T19:10:12.145Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "CallEmailWebApiLand.cs",
               "DocumentMoniker": "D:\\source\\repos\\EmailWebApiLand9\\EmailWebApiLand9.CallEmailWebApiLand\\CallEmailWebApiLand.cs",
               "RelativeDocumentMoniker": "..\\..\\EmailWebApiLand9\\EmailWebApiLand9.CallEmailWebApiLand\\CallEmailWebApiLand.cs",
@@ -121,12 +121,11 @@
               "RelativeToolTip": "..\\..\\EmailWebApiLand9\\EmailWebApiLand9.CallEmailWebApiLand\\CallEmailWebApiLand.cs",
               "ViewState": "AgIAACYAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-01T19:09:55.842Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-01T19:09:55.842Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "MainOpsOutput.cs",
               "DocumentMoniker": "D:\\source\\repos\\nrc\\Nrc9\\Nrc9.Data\\Models\\MainOpsOutput.cs",
               "RelativeDocumentMoniker": "Nrc9.Data\\Models\\MainOpsOutput.cs",
@@ -138,15 +137,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 3,
               "Title": "GetAthenaSourceFileList.cs",
               "DocumentMoniker": "D:\\source\\repos\\nrc\\Nrc9\\Nc9.ConsoleApp\\GetAthenaSourceFileList.cs",
               "RelativeDocumentMoniker": "Nc9.ConsoleApp\\GetAthenaSourceFileList.cs",
               "ToolTip": "D:\\source\\repos\\nrc\\Nrc9\\Nc9.ConsoleApp\\GetAthenaSourceFileList.cs",
               "RelativeToolTip": "Nc9.ConsoleApp\\GetAthenaSourceFileList.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAADwvxgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAIAAAAAAAAAAIAwwBYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T19:28:02.326Z"
+              "WhenOpened": "2025-07-28T19:28:02.326Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -174,20 +174,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "OpsController.cs",
               "DocumentMoniker": "D:\\source\\repos\\nrc\\Nrc9\\Nrc9.WebApiLand\\Controllers\\OpsController.cs",
               "RelativeDocumentMoniker": "Nrc9.WebApiLand\\Controllers\\OpsController.cs",
               "ToolTip": "D:\\source\\repos\\nrc\\Nrc9\\Nrc9.WebApiLand\\Controllers\\OpsController.cs",
               "RelativeToolTip": "Nrc9.WebApiLand\\Controllers\\OpsController.cs",
-              "ViewState": "AgIAAKIAAAAAAAAAAAApwLEAAABNAAAAAAAAAA==",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAwwLEAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-28T17:22:51.496Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\source\\repos\\nrc\\Nrc9\\Nrc9.WebApiLand\\Program.cs",
               "RelativeDocumentMoniker": "Nrc9.WebApiLand\\Program.cs",
@@ -223,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\source\\repos\\nrc\\Nrc9\\Nrc9.WebApiLand\\appsettings.json",
               "RelativeDocumentMoniker": "Nrc9.WebApiLand\\appsettings.json",
@@ -231,8 +231,7 @@
               "RelativeToolTip": "Nrc9.WebApiLand\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-28T14:45:02.288Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-28T14:45:02.288Z"
             },
             {
               "$type": "Document",
@@ -248,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\source\\repos\\nrc\\Nrc9\\Nc9.ConsoleApp\\appsettings.json",
               "RelativeDocumentMoniker": "Nc9.ConsoleApp\\appsettings.json",
@@ -267,20 +266,20 @@
               "RelativeDocumentMoniker": "Nc9.ConsoleApp\\Program.cs",
               "ToolTip": "D:\\source\\repos\\nrc\\Nrc9\\Nc9.ConsoleApp\\Program.cs",
               "RelativeToolTip": "Nc9.ConsoleApp\\Program.cs",
-              "ViewState": "AgIAAEcAAAAAAAAAAIAwwFQAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAGYAAAAAAAAAAIAwwH0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T16:54:33.763Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "MainOps.cs",
               "DocumentMoniker": "D:\\source\\repos\\nrc\\Nrc9\\Nc9.ConsoleApp\\MainOps.cs",
               "RelativeDocumentMoniker": "Nc9.ConsoleApp\\MainOps.cs",
               "ToolTip": "D:\\source\\repos\\nrc\\Nrc9\\Nc9.ConsoleApp\\MainOps.cs",
               "RelativeToolTip": "Nc9.ConsoleApp\\MainOps.cs",
-              "ViewState": "AgIAAFYBAAAAAAAAAAAswFoBAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAOUBAAAAAAAAAAApwAMCAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T16:54:21.777Z",
               "EditorCaption": ""
