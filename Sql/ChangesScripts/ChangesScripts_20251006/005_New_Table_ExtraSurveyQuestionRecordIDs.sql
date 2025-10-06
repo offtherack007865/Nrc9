@@ -1,17 +1,25 @@
 -- SQL Instance Name:  smg-sql01
+IF (@@SERVERNAME <> 'smg-sql01')
+BEGIN
+PRINT 'Invalid SQL Server Connection'
+RETURN
+END
+
 USE [CUSTOMERSURVEY];
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'ExtraSurveyQuestionWorkDays' AND TABLE_SCHEMA = 'nrc')
-   DROP TABLE [nrc].[ExtraSurveyQuestionWorkDays];
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'ExtraSurveyQuestionRecordIDs' AND TABLE_SCHEMA = 'nrc')
+   DROP TABLE [nrc].[ExtraSurveyQuestionRecordIDs];
 GO
 /* -----------------------------------------------------------------------------------------------------------
-   Table Name  :  nrc.ExtraSurveyQuestionWorkDays
+   Table Name  :  nrc.ExtraSurveyQuestionRecordIDs
    Business Analyis:
    Project/Process :   
-   Description     :  The 3 of 5 workdays on which we issue the Extra Survey question.  The appt date's day of the
-                      week falls within this list of work days, that appt will have an extra survey question.
+   Description     :   Based on the number of unique records in the "clinics" file, randomly generate and
+                       store 20% of the "clinics" file record ids in this table.  These records will be marked
+                       as needing an extra survey question.                       
                         
    Author          :   Philip Morrison
-   Create Date     :   6/23/2025 
+   Create Date     :   10/6/2025 
 
    ***********************************************************************************************************
    **         Change History                                                                                **
@@ -19,16 +27,15 @@ GO
 
    Date       Version    Author             Description
    --------   --------   -----------        ------------
-   6/23/2025  1.01.001   Philip Morrison    Created
-   6/26/2025  1.01.002   Philip Morrison    Changed Database name and Table Name to meet DBA standards.
+   10/6/2025  1.01.001   Philip Morrison    Created
 */ -----------------------------------------------------------------------------------------------------------                                   
 
 
-CREATE TABLE [nrc].[ExtraSurveyQuestionWorkDays](
-    [ExtraSurveyQuestionWorkDaysID] [int] IDENTITY ( 1, 1 ) NOT NULL
-	,[ExtraSurveyQuestionWorkDay] [int] NOT NULL
- CONSTRAINT [pk_nrcExtraSurveyQuestionWorkDays] PRIMARY KEY CLUSTERED 
+CREATE TABLE [nrc].[ExtraSurveyQuestionRecordIDs](
+    [ExtraSurveyQuestionRecordIDsID] [int] IDENTITY ( 1, 1 ) NOT NULL
+	,[ExtraSurveyQuestionRecordID] [int] NOT NULL
+ CONSTRAINT [pk_nrcExtraSurveyQuestionRecordIDs] PRIMARY KEY CLUSTERED 
 (
-	[ExtraSurveyQuestionWorkDaysID] ASC
+	[ExtraSurveyQuestionRecordIDsID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
