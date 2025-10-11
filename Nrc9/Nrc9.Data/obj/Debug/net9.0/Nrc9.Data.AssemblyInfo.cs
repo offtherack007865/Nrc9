@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nrc9.Data")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d16aff1ca39eae7c5be8a96f014bca7412db98f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05f7c822742a70f40e8536f92e8625d2fa1bddcb")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nrc9.Data")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nrc9.Data")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

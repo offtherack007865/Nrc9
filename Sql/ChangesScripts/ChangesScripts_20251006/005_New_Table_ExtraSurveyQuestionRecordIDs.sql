@@ -30,6 +30,12 @@ GO
    10/6/2025  1.01.001   Philip Morrison    Created
 */ -----------------------------------------------------------------------------------------------------------                                   
 
+-- STEP 001 of 001
+-- Create table [nrc].[ExtraSurveyQuestionRecordIDs]
+SELECT 1;
+-- 1 record 
+
+BEGIN TRANSACTION;
 
 CREATE TABLE [nrc].[ExtraSurveyQuestionRecordIDs](
     [ExtraSurveyQuestionRecordIDsID] [int] IDENTITY ( 1, 1 ) NOT NULL
@@ -39,3 +45,12 @@ CREATE TABLE [nrc].[ExtraSurveyQuestionRecordIDs](
 	[ExtraSurveyQuestionRecordIDsID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+IF @@ERROR > 0 BEGIN
+  SELECT 0;
+  ROLLBACK TRANSACTION;
+END
+ELSE BEGIN
+  SELECT 1;
+  COMMIT TRANSACTION;
+END

@@ -8,4 +8,22 @@ END
 USE [CUSTOMERSURVEY];
 
 
+
+-- STEP 001 of 001
+-- Drop SP [nrc].[di_InsertExtraSurveyQuestionWorkDays]
+SELECT 1;
+-- 1 record 
+
+BEGIN TRANSACTION;
+
 DROP PROCEDURE [nrc].[di_InsertExtraSurveyQuestionWorkDays];
+
+
+IF @@ERROR > 0 BEGIN
+  SELECT 0;
+  ROLLBACK TRANSACTION;
+END
+ELSE BEGIN
+  SELECT 1;
+  COMMIT TRANSACTION;
+END

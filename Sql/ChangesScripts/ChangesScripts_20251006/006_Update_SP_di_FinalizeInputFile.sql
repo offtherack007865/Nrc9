@@ -3,6 +3,9 @@ USE [Utilities];
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND OBJECT_ID = OBJECT_ID('nrc.di_FinalizeInputFile'))
    DROP PROC [nrc].[di_FinalizeInputFile]
 GO
+
+BEGIN TRANSACTION;
+
 CREATE PROCEDURE [nrc].[di_FinalizeInputFile]
 (
   @inputOutputFullFilename [nvarchar] (300)
@@ -922,3 +925,4 @@ END CATCH
 
 
 END
+
