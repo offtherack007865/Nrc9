@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Nrc9.WebApiLand")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05f7c822742a70f40e8536f92e8625d2fa1bddcb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+138aa5f111fc6f40ec68f801a61f1b8357eea6ca")]
 [assembly: System.Reflection.AssemblyProductAttribute("Nrc9.WebApiLand")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Nrc9.WebApiLand")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

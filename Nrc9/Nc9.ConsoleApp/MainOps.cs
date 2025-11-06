@@ -189,6 +189,12 @@ namespace Nrc9.ConsoleApp
                     .Select(l => l.OutputLine)
                     .ToList();
 
+                // pwm 11/6/2025 - I'm not sure why the header line was not included in one out of hundreds of files,
+                // but just in case it happens again, I insert the header line.
+                if (!outputStringList[0].StartsWith("PatientNameGiven,"))
+                {
+                    outputStringList.Insert(0, "PatientNameGiven,PatientNameFamily,AddressStreet1,AddressCity,AddressState,AddressPostalCode,PhoneAreaCityCode,PhoneLocalNumber,MRN,DateOfBirth,AdministrativeSex,PrimaryLanguage,Race,EthnicGroup,MaritalStatus,Email,PatientClass,FacilityName,FacilityNumber,VisitNumber,AdmitDateTime,DischargeDateTime,AdmitSource,DischargeStatus,LocationCriteria,Location,MSDRG,DiagnosisPrimaryICD10,Diagnosis2ICD10,Diagnosis3ICD10,IsDeceased,ICU,EDAdmit,PrimaryPayerID,PrimaryPayerName,AttendingDoctorNameGiven,AttendingDoctorNameSecondGiven,AttendingDoctorNameFamily,AttendingDoctorNameSuffix,AttendingDoctorDegree,AttendingDoctorNPI,AttendingDoctorSpecialty,ProcedurePrimaryCPT,Procedure2CPT,Procedure3CPT,HNumIPDisch,PreferredOutreachMode,CGCAHPS");
+                }
             }
 
             // If input file has just the header, create empty output file.
