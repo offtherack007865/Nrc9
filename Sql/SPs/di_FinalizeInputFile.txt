@@ -7,7 +7,6 @@ CREATE PROCEDURE [nrc].[di_FinalizeInputFile]
 (
   @inputOutputFullFilename [nvarchar] (300)
 )
-
 /* -----------------------------------------------------------------------------------------------------------
    Procedure Name  :  nrc.di_FinalizeInputFile
    Business Analyis:
@@ -33,6 +32,7 @@ CREATE PROCEDURE [nrc].[di_FinalizeInputFile]
                                             an extra survey question.
    11/13/2025 1.01.006   Philip Morrison    Change source of Patient Phone Number from Athena Home Phone Number to 
                                             Athena Mobile Phone Number.
+   11/14/2025 1.02.007   Bob Bowers         Updated @BatchDescription and @ProcessID
 */ -----------------------------------------------------------------------------------------------------------                                   
 
 AS
@@ -49,13 +49,13 @@ DECLARE @RandomlyGeneratedRecordIDCountSoFar [int] = 0;
 
 -- Template Declarations
 DECLARE @Application            varchar(128) = 'Nrc' 
-DECLARE @Version                varchar(25)  = '1.01.004'
+DECLARE @Version                varchar(25)  = '1.01.006'
 
-DECLARE @ProcessID              int          = 0
+DECLARE @ProcessID              int          = 230
 DECLARE @Process                varchar(128) = 'ImportAndConvert'
 
 DECLARE @BatchOutID             int
-DECLARE @BatchDescription       varchar(1000) = @@ServerName + '  - ' + @Version
+DECLARE @BatchDescription       varchar(1000) = @@SERVERNAME + '.' + DB_NAME() + '.' + OBJECT_SCHEMA_NAME(@@ProcID) + '.' + OBJECT_NAME(@@ProcID) + '  - ' + @Version
 DECLARE @BatchDetailDescription varchar(1000)
 DECLARE @BatchMessage           varchar(MAX)
 DECLARE @User                   varchar(128) = SUSER_NAME()
